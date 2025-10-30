@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unique Modern Management Consulting (UMMC)</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <!-- AOS Animation -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #0b2342;
+      --accent-color: #007bff;
+      --bg-light: #ffffff;
+      --text-dark: #1a1a1a;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+ header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 8%;
+      background: var(--bg-light);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 1s ease;
+    }
+
+    header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header img.logo {
+      height: 55px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 1s ease;
+    }
+
+    header.visible img.logo {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 1s ease 0.3s;
+    }
+
+    header.visible nav ul {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover {
+      color: var(--accent-color);
+    }
+
+    .lang-toggle {
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    /* ===== HAMBURGER ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* زر الإغلاق */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--primary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        gap: 30px;
+      }
+
+      nav ul.active {
+        right: 0;
+      }
+
+      nav ul li a {
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      .lang-toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .close-btn {
+        display: block;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      background: url('https://res.cloudinary.com/dcbxuax2c/image/upload/v1761565049/istockphoto-1827291486-612x612_skzspy.jpg') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(11, 35, 66, 0.473);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      color: #f1f1f1;
+    }
+
+    .hero-content .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 5px;
+      border-radius: 5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      border: 2px solid #fff;
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background: #fff;
+      color: var(--primary-color);
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 80px 8%;
+      text-align: center;
+    }
+
+    .about h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .about .btn {
+      display: inline-block;
+      margin-top: 25px;
+      background: var(--accent-color);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .about .btn:hover {
+      background: #0056b3;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      padding: 80px 8%;
+      background-color: #f8f9fb;
+      text-align: center;
+    }
+
+    .services h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .service-card i {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .services .btn {
+      display: inline-block;
+      margin-top: 40px;
+      background: var(--accent-color);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .services .btn:hover {
+      background: #0056b3;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 80px 8%;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      margin-bottom: 40px;
+    }
+
+    .testimonial-item {
+      max-width: 700px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    .testimonial-item span {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #cfd8e3;
+    }
+
+    /* ===== CONTACT FORM ===== */
+    .contact {
+      padding: 80px 8%;
+      background: #f8f9fb;
+      text-align: center;
+    }
+
+    .contact h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+.contact-tagline {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+    form {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    form .form-group {
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+    form button {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    form button:hover {
+      background: var(--accent-color);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg-light);
+      color: var(--primary-color);
+      padding: 60px 8% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    footer h4 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    footer ul li a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    footer ul li a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid rgba(11,35,66,0.2);
+      padding-top: 20px;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <!-- ===== HEADER ===== -->
+  <header id="main-header">
+    <img src="https://res.cloudinary.com/dcbxuax2c/image/upload/v1761749145/Unique_Modern_Management_Consulting_2_ciuae6.png" alt="UMMC Logo" class="logo">
+    <nav>
+      <ul>
+        <span class="close-btn">&times;</span>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="lang-toggle">AR | EN | FR | ES</div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Global Expertise. Local Precision. Tech-Enabled Advisory.</h1>
+      <p>Empowering organizations across the Middle East and beyond with advanced financial, governance, and digital transformation solutions—delivered with cultural fluency and industry insight.</p>
+      <a href="#" class="btn btn-primary">Book a Virtual Consultation</a>
+      <a href="#" class="btn btn-secondary">Explore Our Services</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" data-aos="fade-up">
+    <h2>About UMMC</h2>
+    <p>
+      At Unique Modern Management Consulting (UMMC), we bridge global best practices with regional market realities.
+      From enterprise financial advisory and governance frameworks to digital transformation and compliance solutions,
+      we help organizations make confident decisions, operate efficiently, and grow sustainably.
+    </p>
+    <a href="#" class="btn">More Details</a>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services">
+    <h2 data-aos="fade-up">Our Core Services</h2>
+    <div class="service-grid">
+      <div class="service-card" data-aos="zoom-in">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Financial Advisory</h3>
+        <p>Financial Modeling, Forecasting, Investment Readiness, Valuation & Audit Preparation.</p>
+      </div>
+      <div class="service-card" data-aos="zoom-in">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <h3>Governance & Compliance</h3>
+        <p>Corporate Governance, AML / ESG, Internal Controls, Policy Development & Regulatory Alignment.</p>
+      </div>
+      <div class="service-card" data-aos="zoom-in">
+        <i class="fa-solid fa-microchip"></i>
+        <h3>Digital Transformation</h3>
+        <p>ERP Selection, AI Insights, Cloud Solutions & Digital Workflow Integration.</p>
+      </div>
+      <div class="service-card" data-aos="zoom-in">
+        <i class="fa-solid fa-globe"></i>
+        <h3>Remote & Multilingual Advisory</h3>
+        <p>Virtual Strategy Sessions, Online Compliance Audits, and Bilingual Deliverables.</p>
+      </div>
+    </div>
+    <a href="#" class="btn">More Details</a>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials">
+    <h2 data-aos="fade-up">What Our Clients Say</h2>
+    <div class="testimonial-item" data-aos="fade-up">
+      “UMMC provided us with a governance and compliance framework that strengthened decision-making across our entire organization.”
+      <span>— Group CEO, GCC Manufacturing Firm</span>
+    </div>
+    <br><br>
+    <div class="testimonial-item" data-aos="fade-up">
+      “Their financial modeling support helped us secure investor confidence and expand into new markets.”
+      <span>— Founder, Technology Startup (Jordan)</span>
+    </div>
+    <br><br>
+    <div class="testimonial-item" data-aos="fade-up">
+      “Professional, insightful, and culturally aware. Highly recommended for cross-border advisory.”
+      <span>— Board Member, Multinational Holding</span>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT FORM ===== -->
+  <section class="contact" id="contact">
+<h2 data-aos="fade-up">Contact Us</h2>
+<p class="contact-tagline" data-aos="fade-up" data-aos-delay="150">
+  Let’s shape your success story together — our experts are just one message away.
+</p>
+    <form data-aos="zoom-in">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h4>About UMMC</h4>
+        <p>Unique Modern Management Consulting bridges global best practices with regional insight to empower growth, governance, and digital excellence.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> King Hussein Business Park, Amman, Jordan</li>
+          <li><i class="fa-solid fa-envelope"></i> info@ummc.com</li>
+          <li><i class="fa-solid fa-phone"></i> +962 6 555 0000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 UMMC. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    // تأثير ظهور الهيدر عند التحميل
+    window.addEventListener('load', () => {
+      document.getElementById('main-header').classList.add('visible');
+    });
+
+    // Hamburger Toggle + زر الإغلاق
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('nav ul');
+    const closeBtn = document.querySelector('.close-btn');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
